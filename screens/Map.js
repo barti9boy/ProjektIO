@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, View, Button, TextInput } from 'react-native';
 import { WebView } from 'react-native-webview';
-import mapTemplate from './map-template';
+import mapTemplate from '../map-template';
 
 export default function App() {
   let webRef = undefined;

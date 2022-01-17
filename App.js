@@ -1,12 +1,21 @@
 import React from "react";
-import { Text, View, Button, Alert, TouchableOpacity, TextInput } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const App = () => {
+import StartScreen from './screens/StartScreen'
+import TomTomMap from './screens/Map'
+
+const Stack = createNativeStackNavigator();
+
+const MyStack = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: "center"}}>
-      <Button title="Log in" onPress={() => Alert.alert('hello')}></Button>
-    </View>
-  )
-}
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="StartScreen" component={StartScreen} />
+        <Stack.Screen name="TomTomMap" component={TomTomMap} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-export default App
+export default MyStack
