@@ -8,3 +8,5 @@ const App = () => {
     </View>
   )
 }
+
+export default App
