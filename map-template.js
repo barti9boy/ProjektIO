@@ -13,10 +13,11 @@ export default `
             .marker {
 
                 background-size: cover;
-                width: 64px;
-                height: 64px;
+                width: 32;
+                height: 32px;
                 background-color: red;
                 background-image: url('./icons8-pin-32.png');
+                border-radius: 16px;
 
             }
     </style>
@@ -52,6 +53,8 @@ export default `
             .setLngLat([lng, lat])
             .addTo(map)
           }
+
+          return new Promise(())
 
     </script>
 </div>
