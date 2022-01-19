@@ -146,6 +146,19 @@ const StartScreen = ({navigation}) => {
                         color: '#009387'
                     }]}>Sign Up</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('TomTomMap')}
+                    style={[styles.signIn, {
+                        borderColor: '#009387',
+                        borderWidth: 1,
+                        marginTop: 15
+                    }]}
+                >
+                    <Text style={[styles.textSign, {
+                        color: '#009387'
+                    }]}>Map</Text>
+                </TouchableOpacity>
             </View>
         </Animatable.View>
       </View>
