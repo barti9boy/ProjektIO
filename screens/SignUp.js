@@ -70,6 +70,7 @@ const SignUp = ({navigation}) => {
             confirmSecureTextEntry: !data.confirmSecureTextEntry
         });
       }
+
       return (
         <View style={styles.container}>
             <StatusBar backgroundColor='#009387' barStyle="light-content"/>

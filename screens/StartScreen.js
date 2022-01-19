@@ -53,6 +53,12 @@ const StartScreen = ({navigation}) => {
           secureTextEntry: !data.secureTextEntry
       });
     }
+
+    const login = (email, password) =>{
+        alert(email + " " + password)
+    }
+
+
     return (
       <View style={styles.container}>
           <StatusBar backgroundColor='#009387' barStyle="light-content"/>
@@ -125,14 +131,18 @@ const StartScreen = ({navigation}) => {
             </View>
 
             <View style={styles.button}>
-                <LinearGradient
-                    colors={['#08d4c4', '#01ab9d']}
-                    style={styles.signIn}
+            <TouchableOpacity
+                    onPress={() => {login(data.email, data.password)}}
+                    style={[styles.signIn, {
+                        borderColor: '#009387',
+                        borderWidth: 1,
+                        marginTop: 15
+                    }]}
                 >
                     <Text style={[styles.textSign, {
-                        color:'#fff'
+                        color: '#009387'
                     }]}>Sign In</Text>
-                </LinearGradient>
+                </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SignUp')}
