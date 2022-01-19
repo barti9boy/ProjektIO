@@ -31,11 +31,31 @@ export default `
     <script>
         // create the map
         tt.setProductInfo('Hit the road truck', '1.0');
+        const convertToPoints = (lngLat) => {
+            return {
+              point: {
+                latitude: lngLat.lat,
+                longitude: lngLat.lng
+              }
+            }
+          }
+        const addDeliveryMarker = (lngLat, map) => {
+            const element = document.createElement('div')
+            element.className = 'marker-delivery'
+            new tt.Marker({
+              element: element
+            })
+            .setLngLat(lngLat)
+            .addTo(map)
+          }
+
+        
+
         let map = tt.map({
             key: '${process.env.TOM_TOM_KEY}',
             container: 'map',
             center: [19.906, 50.071],
-            zoom: 15
+            zoom: 13
         });
         
         map.on('dragend', function() {
@@ -52,9 +72,9 @@ export default `
             })
             .setLngLat([lng, lat])
             .addTo(map)
-          }
+        }
 
-          return new Promise(())
+        
 
     </script>
 </div>
