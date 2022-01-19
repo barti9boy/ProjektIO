@@ -1,21 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, View, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Button, TextInput, Image } from 'react-native';
 import { WebView } from 'react-native-webview';
 import mapTemplate from '../map-template';
 
 export default function App() {
   let webRef = undefined;
-  let [mapCenter, setMapCenter] = useState('-121.913, 37.361');
+  let [mapCenter, setMapCenter] = useState('19.906, 50.071');
 
   const onButtonPress = () => {
     const [lng, lat] = mapCenter.split(",");
     webRef.injectJavaScript(`map.setCenter([${parseFloat(lng)}, ${parseFloat(lat)}])`);
+    webRef.injectJavaScript(`addMarker([${parseFloat(lng)}, ${parseFloat(lat)}])`);
   }
 
   const handleMapEvent = (event) => {
     setMapCenter(event.nativeEvent.data)
   }
+
+
 
   return (
     <View style={styles.container}>
@@ -30,6 +33,7 @@ export default function App() {
         ref={(r) => (webRef = r)}
         onMessage={handleMapEvent}
         style={styles.map}
+        
         originWhitelist={['*']}
         source={{ html: mapTemplate }}
       />
