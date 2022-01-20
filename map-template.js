@@ -13,11 +13,11 @@ export default `
             .marker {
 
                 background-size: cover;
-                width: 32;
-                height: 32px;
+                width: 16;
+                height: 16px;
                 background-color: red;
                 background-image: url('./icons8-pin-32.png');
-                border-radius: 16px;
+                border-radius: 8px;
 
             }
     </style>

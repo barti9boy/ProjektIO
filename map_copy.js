@@ -1,67 +1,46 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Button, TextInput, Image, Alert, FlatList } from 'react-native';
 import { WebView } from 'react-native-webview';
 import mapTemplate from '../map-template';
 import axios from 'axios';
 import { Suggestions } from './Suggestions';
 import * as Location from 'expo-location';
 
-
 export default function App() {
+  let webRef = undefined;
+  let [mapCenter, setMapCenter] = useState('19.906, 50.071');
   const [location, setLocation] = useState(null);
-
+ 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted')
         return;
-
+ 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
   }, []);
-
-  let webRef = undefined;
-  let [mapCenter, setMapCenter] = useState('-121.913, 37.361');
+  
   const tomtomKey = process.env.TOM_TOM_KEY;
+
   let [placeholder, setPlaceholder] = useState('Query e.g. Washington');
   let [showList, setShowList] = useState(false);
   let [suggestionListData, setSuggestionListData] = useState([])
+  const run = `true;`;
 
-  const run = `
-  document.body.style.backgroundColor = 'blue';
-  true;
-  `;
+  const handleSearchTextChange = changedSearchText => { 
+    if (!changedSearchText || changedSearchText.length < 3)  
+      return; 
   
-  const onButtonClick = () => {
-    const [lng, lat] = mapCenter.split(",");
-    webRef.injectJavaScript(`map.setCenter([${parseFloat(lng)}, ${parseFloat(lat)}])`);
-  }
-  
-  const onPressItem = (item) => {
-    setPlaceholder(item.address);
-    setMapCenter(`${item.lat}, ${item.lon}`)
-    setShowList(false);
-    webRef.injectJavaScript(`map.setCenter([${parseFloat(item.lon)}, 
-      ${parseFloat(item.lat)}])`);
-  }
-
-  const handleMapEvent = (event) => {
-    setMapCenter(event.nativeEvent.data)
-  }
-
-  const handleSearchTextChange = changedSearchText => {
-    if (!changedSearchText || changedSearchText.length < 5) 
-      return;
-
-    let baseUrl = `https://api.tomtom.com/search/2/search/${changedSearchText}.json?`;
-    let searchUrl = baseUrl + `key=${tomtomKey}`;
+    let baseUrl = `https://api.tomtom.com/search/2/search/${changedSearchText}.json?`; 
+    let searchUrl = baseUrl + `key=${tomtomKey}`; 
 
     if (location) {
       searchUrl = searchUrl + `&lon=${location.coords.longitude}`;
       searchUrl = searchUrl + `&lat=${location.coords.latitude}`;
-    }
+    }  
 
     axios
       .get(searchUrl)  
@@ -96,36 +75,60 @@ export default function App() {
         }
       })   
   }
+  const onPressItem = (item) => { 
+    setPlaceholder(item.address); 
+    setMapCenter(`${item.lat}, ${item.lon}`) 
+    setShowList(false); 
+    webRef.injectJavaScript(`map.setCenter([${parseFloat(item.lon)},  
+      ${parseFloat(item.lat)}])`); 
+  }
+  const onButtonPress = () => {
+    const [lng, lat] = mapCenter.split(",");
+    webRef.injectJavaScript(`map.setCenter([${parseFloat(lng)}, ${parseFloat(lat)}])`);
+  }
+
+  const onButtonPress2 = () => {
+    const [lng, lat] = mapCenter.split(",");
+    webRef.injectJavaScript(`addMarker([${parseFloat(lng)}, ${parseFloat(lat)}])`);
+    webRef.injectJavaScript(` recalculateRoutes()`);
+    
+  }
+
+  const handleMapEvent = (event) => {
+    setMapCenter(event.nativeEvent.data)
+  }
+
+
 
   return (
     <View style={styles.container}>
       <View style={styles.buttons}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={setMapCenter}
-          value={mapCenter}></TextInput>
-        <Button title="Set Center" onPress={onButtonClick}></Button>
+        <TextInput 
+        style={styles.textInput}
+        onChangeText={setMapCenter}
+        value={mapCenter}></TextInput>
+        <Button title="Set Center" onPress={onButtonPress}></Button>
+        <Button title="Add Marker" onPress={onButtonPress2}></Button>
       </View>
-
-      <Suggestions 
-        placeholder={placeholder}
-        showList={showList} 
-        suggestionListData={suggestionListData} 
-        onPressItem={onPressItem} 
-        handleSearchTextChange={handleSearchTextChange}>
+      <Suggestions  
+        placeholder={placeholder} 
+        showList={showList}  
+        suggestionListData={suggestionListData}  
+        onPressItem={onPressItem}  
+        handleSearchTextChange={handleSearchTextChange}> 
       </Suggestions>
-
       <WebView
+      
         ref={(r) => (webRef = r)}
         onMessage={handleMapEvent}
         style={styles.map}
+        
         originWhitelist={['*']}
         source={{ html: mapTemplate }}
       />
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
@@ -133,26 +136,22 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: 'row',
-    height: '10%',
+    height: '15%',
     backgroundColor: '#fff',
     color: '#000',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 12,
-    marginBottom: 0
+    marginTop: 4,
+    marginRight: 4,
   },
   textInput: {
     height: 40,
-    width: "60%",
+    width: "40%",
     marginRight: 12,
     paddingLeft: 5,
-    borderWidth: 1
+    borderWidth: 1,
   },
-  map: {
-    transform: [{ scale: 3 }],
-    width: '100%',
-    height: '85%',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+  map: { 
+    transform: [{ scale: 4}],
+  },
 });
