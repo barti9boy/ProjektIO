@@ -55,7 +55,6 @@ export default `
             .addTo(map)
 
             marker.setPopup(popup).togglePopup()
-
           }
 
 

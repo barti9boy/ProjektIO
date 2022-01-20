@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Button, TextInput, Navigation } from 'react-native';
+import { StyleSheet, View, Button, TextInput } from 'react-native';
 import { WebView } from 'react-native-webview';
 import mapTemplate from '../map-template';
 import axios from 'axios';
@@ -10,7 +10,6 @@ import * as Location from 'expo-location';
 
 export default function App() {
   const [location, setLocation] = useState(null);
-
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -29,6 +28,7 @@ export default function App() {
   let [showList, setShowList] = useState(false);
   let [suggestionListData, setSuggestionListData] = useState([])
 
+
   const run = `
   document.body.style.backgroundColor = 'blue';
   true;
@@ -37,9 +37,7 @@ export default function App() {
   const onButtonClick = () => {
     const [lng, lat] = mapCenter.split(",");
     webRef.injectJavaScript(`map.setCenter([${parseFloat(lng)}, ${parseFloat(lat)}])`);
-
   }
-  
   const onPressItem = (item) => {
     setPlaceholder(item.address);
     setMapCenter(`${item.lat}, ${item.lon}`)
@@ -53,17 +51,20 @@ export default function App() {
   const handleMapEvent = (event) => {
     setMapCenter(event.nativeEvent.data)
   }
-  const routeCalculate = () => {
-    let baseUrl = `https://api.tomtom.com/routing/1/calculateRoute/52.50931,13.42936:52.50274,13.43872/json?instructionsType=text&language=en-US&vehicleHeading=90&sectionType=traffic&report=effectiveSettings&routeType=eco&traffic=true&avoid=unpavedRoads&travelMode=car&vehicleMaxSpeed=120&vehicleCommercial=false&vehicleEngineType=combustion&key=${tomtomKey}`
+  const routeCalculate = ([lon1, lat1],[lon2, lat2]) => {
+
+    let baseUrl = `https://api.tomtom.com/routing/1/calculateRoute/${lon1},${lat1}:${lon2},${lat2}/json?instructionsType=text&language=en-US&vehicleHeading=90&sectionType=traffic&report=effectiveSettings&routeType=eco&traffic=true&avoid=unpavedRoads&travelMode=car&vehicleMaxSpeed=120&vehicleCommercial=false&vehicleEngineType=combustion&key=${tomtomKey}`
 
     axios
       .get(baseUrl)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
       });
 
   }
-  routeCalculate()
+    routeCalculate([41.50930,13.42936],[52.50274,13.43872])
+  
+  
   const handleSearchTextChange = changedSearchText => {
     if (!changedSearchText || changedSearchText.length < 5) 
       return;
