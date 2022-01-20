@@ -26,7 +26,7 @@ CREATE TABLE Users (
   	Estimated_Location VARCHAR(40),
   	Avalible_For_Task BOOLEAN,
 	TruckID VARCHAR(10),
-	User_Token VARCHAR(20) NOT NULL
+	User_Token VARCHAR(20) NOT NULL,
 	FOREIGN KEY (TruckID) REFERENCES Trucks(TruckID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
