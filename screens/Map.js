@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Button, TextInput, Navigation } from 'react-native';
 import { WebView } from 'react-native-webview';
 import mapTemplate from '../map-template';
 import axios from 'axios';
@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   let webRef = undefined;
-  let [mapCenter, setMapCenter] = useState('-121.913, 37.361');
+  let [mapCenter, setMapCenter] = useState('19.906, 50.071');
   const tomtomKey = process.env.TOM_TOM_KEY;
   let [placeholder, setPlaceholder] = useState('Query e.g. Washington');
   let [showList, setShowList] = useState(false);
@@ -37,6 +37,7 @@ export default function App() {
   const onButtonClick = () => {
     const [lng, lat] = mapCenter.split(",");
     webRef.injectJavaScript(`map.setCenter([${parseFloat(lng)}, ${parseFloat(lat)}])`);
+
   }
   
   const onPressItem = (item) => {
@@ -45,6 +46,8 @@ export default function App() {
     setShowList(false);
     webRef.injectJavaScript(`map.setCenter([${parseFloat(item.lon)}, 
       ${parseFloat(item.lat)}])`);
+      webRef.injectJavaScript(`addMarker([${parseFloat(item.lon)}, 
+        ${parseFloat(item.lat)}], '${item.address}')`);
   }
 
   const handleMapEvent = (event) => {
@@ -99,15 +102,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttons}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={setMapCenter}
-          value={mapCenter}></TextInput>
-        <Button title="Set Center" onPress={onButtonClick}></Button>
-      </View>
-
-      <Suggestions 
+      <Suggestions style={styles.searchbox}
         placeholder={placeholder}
         showList={showList} 
         suggestionListData={suggestionListData} 
@@ -155,4 +150,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   }
+
 });
