@@ -9,6 +9,17 @@ export default `
                 height: 100%;
                 width: 100%;
             }
+
+            .marker {
+
+                background-size: cover;
+                width: 16;
+                height: 16px;
+                background-color: red;
+                background-image: url('./icons8-pin-32.png');
+                border-radius: 8px;
+
+            }
     </style>
     
     <div id='map' class='map'></div>
@@ -19,18 +30,36 @@ export default `
 
     <script>
         // create the map
-        tt.setProductInfo('TomTom Maps React Native Demo', '1.0');
+        tt.setProductInfo('Hit the road truck', '1.0');
         let map = tt.map({
-            key: '8FWYqQmbyJLkYyAUvECxdm0Kzu1ts79t',
+            key: '${process.env.TOM_TOM_KEY}',
             container: 'map',
             center: [19.906, 50.071],
-            zoom: 15
+            zoom: 13
         });
         
-        map.on('dragend', function() {
-            let center = map.getCenter();
-            window.ReactNativeWebView.postMessage(center.lng.toFixed(3) + ", " + center.lat.toFixed(3));
-        })
+
+
+        const addMarker = ([lng, lat], address) => {
+            const popupOffset = {
+                bottom: [0, -25]
+              }
+            const popup = new tt.Popup({ offset: popupOffset }).setHTML(address)
+            const element = document.createElement('div')
+            element.className = 'marker'
+            const marker = new tt.Marker({
+              draggable: true,
+              element: element,
+            })
+            .setLngLat([lng, lat])
+            .addTo(map)
+
+            marker.setPopup(popup).togglePopup()
+          }
+
+
+          
+
     </script>
 </div>
 `;
