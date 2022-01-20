@@ -16,7 +16,7 @@ export default `
                 width: 16;
                 height: 16px;
                 background-color: red;
-                background-image: url('./icons8-pin-32.png');
+                background-image: url('https://www.pngfind.com/pngs/m/671-6710794_map-pin-icon-download-icons-pin-icon-google.png');
                 border-radius: 8px;
 
             }

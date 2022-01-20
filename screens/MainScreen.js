@@ -80,7 +80,7 @@ const MainScreen = ({navigation}) => {
                   >
                       <Text style={[styles.textSign, {
                           color: '#009387'
-                      }]}>Map</Text>
+                      }]}>Task</Text>
                   </TouchableOpacity>
   
                   <TouchableOpacity
