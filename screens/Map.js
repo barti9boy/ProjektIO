@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Suggestions } from './Suggestions';
 import * as Location from 'expo-location';
 
+
 export default function App() {
   const [location, setLocation] = useState(null);
 
