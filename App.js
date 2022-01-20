@@ -8,6 +8,8 @@ import TomTomMap from './screens/Map'
 import SignUp from "./screens/SignUp";
 import MainScreen from './screens/MainScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import EmployerScreen from './screens/EmployerScreen'
+
 
 
 
@@ -17,6 +19,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack1 = createNativeStackNavigator();
 const Stack2 = createNativeStackNavigator();
+const Stack3 = createNativeStackNavigator();
+
 
 
 const MyStack = () => {
@@ -134,12 +138,18 @@ const MyStack = () => {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         
-          { loginState.userToken !== null ? (
+          { loginState.userToken != 'token321' && loginState.userToken != null ? (
             <Stack2.Navigator>
               <Stack2.Screen name="MainScreen" component={MainScreen} />
               <Stack2.Screen name="TomTomMap" component={TomTomMap} />
               <Stack2.Screen name="ProfileScreen" component={ProfileScreen} />
             </Stack2.Navigator>
+          ):
+           loginState.userToken == 'token321' ? (
+            <Stack3.Navigator>
+              <Stack3.Screen name="EmployerScreen" component={EmployerScreen} />
+              <Stack3.Screen name="ProfileScreen" component={ProfileScreen} />
+            </Stack3.Navigator>
           )
           :
           <Stack1.Navigator>
