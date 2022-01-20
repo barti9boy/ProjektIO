@@ -84,7 +84,7 @@ const EmployerScreen = ({navigation}) => {
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                      onPress={() => alert('Select Employer')}
+                      onPress={() => alert('Select Employee')}
                       style={[styles.signIn, {
                           borderColor: '#009387',
                           borderWidth: 1,
