@@ -48,14 +48,13 @@ export default `
             const element = document.createElement('div')
             element.className = 'marker'
             const marker = new tt.Marker({
-              draggable: true,
+              draggable: false,
               element: element,
             })
             .setLngLat([lng, lat])
             .addTo(map)
 
             marker.setPopup(popup).togglePopup()
-
           }
 
 
