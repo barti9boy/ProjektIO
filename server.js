@@ -1,19 +1,14 @@
-var express = require('express');
-var app  = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
 
-var mysql = require('mysql');
-var bodyParser = require('body-parser');
-
-app.use(bodyParser.json({type:'application/json'}));
-app.use(bodyParser.urlencoded({extended:true}));
-
-var con = mysql.createConnection({
+const connection = mysql.createPool({
     host: "mysql.agh.edu.pl",
-    port: "3306",
     user: "kosciole",
     password: "InzynieriaOprogramowania",
     database : 'kosciole' 
-});
+  });
+
 
 con.connect(function(error){
     if(error) console.log(error);

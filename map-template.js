@@ -35,15 +35,16 @@ export default `
             key: '${process.env.TOM_TOM_KEY}',
             container: 'map',
             center: [19.906, 50.071],
-            zoom: 15
+            zoom: 13
         });
         
-        map.on('dragend', function() {
-            let center = map.getCenter();
-            window.ReactNativeWebView.postMessage(center.lng.toFixed(3) + ", " + center.lat.toFixed(3));
-        })
+
 
         const addMarker = ([lng, lat]) => {
+            const popupOffset = {
+                bottom: [0, -25]
+              }
+            const popup = new tt.Popup({ offset: popupOffset }).setHTML('This is you!')
             const element = document.createElement('div')
             element.className = 'marker'
             const marker = new tt.Marker({
@@ -52,7 +53,13 @@ export default `
             })
             .setLngLat([lng, lat])
             .addTo(map)
+
+            marker.setPopup(popup).togglePopup()
+
           }
+
+
+          
 
     </script>
 </div>

@@ -58,11 +58,6 @@ const StartScreen = ({navigation}) => {
         alert(email + " " + password)
     }
     
-    var mysql = require('mysql');
-
-  
-
-
 
     return (
       <View style={styles.container}>
