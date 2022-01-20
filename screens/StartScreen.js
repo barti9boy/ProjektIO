@@ -8,34 +8,39 @@ import {
     TextInput,
     Platform,
     StyleSheet ,
-    StatusBar
+    StatusBar,
+    Alert
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {LinearGradient} from 'expo-linear-gradient';
+import { AuthContext } from "../context";
+import Users from "../users";
 
 const StartScreen = ({navigation}) => {
 
   const [data, setData] = React.useState({
-    email: '',
+    username: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true
   });
 
+  const {signIn} = React.useContext(AuthContext);
+
   const textInputChange = (val) => {
     if( val.length !== 0 ) {
         setData({
             ...data,
-            email: val,
+            username: val,
             check_textInputChange: true
         });
     } else {
         setData({
             ...data,
-            email: val,
+            username: val,
             check_textInputChange: false
         });
     }
@@ -54,8 +59,15 @@ const StartScreen = ({navigation}) => {
       });
     }
 
-    const login = (email, password) =>{
-        alert(email + " " + password)
+    const loginHandle = (userName, password) =>{
+        const foundUser = Users.filter(item => {
+          return userName == item.username && password == item.password;
+        })
+        if(foundUser.length == 0){
+          Alert.alert('Invalid User' , 'Username or password is incorrect.', [{text: 'Ok'}]);
+          return;
+        }
+        signIn(foundUser);
     }
 
 
@@ -69,7 +81,7 @@ const StartScreen = ({navigation}) => {
             animation="fadeInUpBig"
             style={styles.footer}
         >
-            <Text style={styles.text_footer}>Email</Text>
+            <Text style={styles.text_footer}>Username</Text>
             <View style={styles.action}>
                 <FontAwesome 
                     name="user-o"
@@ -77,7 +89,7 @@ const StartScreen = ({navigation}) => {
                     size={20}
                 />
                 <TextInput 
-                    placeholder="Your Email"
+                    placeholder="Your Username"
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => textInputChange(val)}
@@ -132,7 +144,7 @@ const StartScreen = ({navigation}) => {
 
             <View style={styles.button}>
             <TouchableOpacity
-                    onPress={() => {login(data.email, data.password)}}
+                    onPress={() => {loginHandle(data.username, data.password)}}
                     style={[styles.signIn, {
                         borderColor: '#009387',
                         borderWidth: 1,
@@ -155,19 +167,6 @@ const StartScreen = ({navigation}) => {
                     <Text style={[styles.textSign, {
                         color: '#009387'
                     }]}>Sign Up</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('TomTomMap')}
-                    style={[styles.signIn, {
-                        borderColor: '#009387',
-                        borderWidth: 1,
-                        marginTop: 15
-                    }]}
-                >
-                    <Text style={[styles.textSign, {
-                        color: '#009387'
-                    }]}>Map</Text>
                 </TouchableOpacity>
             </View>
         </Animatable.View>

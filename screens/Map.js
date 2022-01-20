@@ -4,6 +4,7 @@ import { StyleSheet, View, Button, TextInput, Image } from 'react-native';
 import { WebView } from 'react-native-webview';
 import mapTemplate from '../map-template';
 
+
 export default function App() {
   let webRef = undefined;
   let [mapCenter, setMapCenter] = useState('19.906, 50.071');
