@@ -40,11 +40,11 @@ export default `
         
 
 
-        const addMarker = ([lng, lat]) => {
+        const addMarker = ([lng, lat], address) => {
             const popupOffset = {
                 bottom: [0, -25]
               }
-            const popup = new tt.Popup({ offset: popupOffset }).setHTML('This is you!')
+            const popup = new tt.Popup({ offset: popupOffset }).setHTML(address)
             const element = document.createElement('div')
             element.className = 'marker'
             const marker = new tt.Marker({
