@@ -19,13 +19,14 @@ CREATE TABLE Trucks (
 
 CREATE TABLE Users (
 	UserID VARCHAR(50) PRIMARY KEY,
+	Is_Employer BOOLEAN,
 	Password VARCHAR(50) NOT NULL,
   	Name VARCHAR(30) NOT NULL,
   	Surname VARCHAR(30) NOT NULL,
-  	Estimated_Location VARCHAR(40) NOT NULL,
-  	Avalible_For_Task BOOLEAN NOT NULL,
-	TruckID VARCHAR(10) NOT NULL,
-	User_Token VARCHAR(20) NOT NULL
+  	Estimated_Location VARCHAR(40),
+  	Avalible_For_Task BOOLEAN,
+	TruckID VARCHAR(10),
+	User_Token VARCHAR(20) NOT NULL,
 	FOREIGN KEY (TruckID) REFERENCES Trucks(TruckID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
