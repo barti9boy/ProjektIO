@@ -15,9 +15,12 @@
     "@tomtom-international/web-sdk-maps": "^6.15.0",
     "@tomtom-international/web-sdk-services": "^6.15.0",
     "babel-plugin-inline-dotenv": "^1.6.0",
+    "body-parser": "^1.19.1",
+    "crypto-js": "^3.3.0",
     "expo": "~44.0.0",
     "expo-linear-gradient": "^11.0.0",
     "expo-status-bar": "~1.2.0",
+    "express": "^4.17.2",
     "mysql": "^2.18.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -27,7 +30,8 @@
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
     "react-native-webview": "^11.16.0",
-    "react-navigation": "^4.4.4"
+    "react-navigation": "^4.4.4",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

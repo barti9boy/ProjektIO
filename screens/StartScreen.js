@@ -57,6 +57,11 @@ const StartScreen = ({navigation}) => {
     const login = (email, password) =>{
         alert(email + " " + password)
     }
+    
+    var mysql = require('mysql');
+
+  
+
 
 
     return (

@@ -54,8 +54,6 @@ export default `
             .addTo(map)
           }
 
-          return new Promise(())
-
     </script>
 </div>
 `;
