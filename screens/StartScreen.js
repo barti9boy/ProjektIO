@@ -69,7 +69,7 @@ const StartScreen = ({navigation}) => {
         }
         signIn(foundUser);
     }
-
+    
 
     return (
       <View style={styles.container}>

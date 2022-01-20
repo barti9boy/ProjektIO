@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, View, Button, TextInput, Image } from 'react-native';
+import { StyleSheet, View, Button, TextInput, Image, Alert } from 'react-native';
 import { WebView } from 'react-native-webview';
 import mapTemplate from '../map-template';
 
@@ -8,11 +8,17 @@ import mapTemplate from '../map-template';
 export default function App() {
   let webRef = undefined;
   let [mapCenter, setMapCenter] = useState('19.906, 50.071');
-
+  
   const onButtonPress = () => {
     const [lng, lat] = mapCenter.split(",");
     webRef.injectJavaScript(`map.setCenter([${parseFloat(lng)}, ${parseFloat(lat)}])`);
+  }
+
+  const onButtonPress2 = () => {
+    const [lng, lat] = mapCenter.split(",");
     webRef.injectJavaScript(`addMarker([${parseFloat(lng)}, ${parseFloat(lat)}])`);
+    webRef.injectJavaScript(` recalculateRoutes()`);
+    
   }
 
   const handleMapEvent = (event) => {
@@ -29,8 +35,10 @@ export default function App() {
         onChangeText={setMapCenter}
         value={mapCenter}></TextInput>
         <Button title="Set Center" onPress={onButtonPress}></Button>
+        <Button title="Add Marker" onPress={onButtonPress2}></Button>
       </View>
       <WebView
+      
         ref={(r) => (webRef = r)}
         onMessage={handleMapEvent}
         style={styles.map}
@@ -53,18 +61,19 @@ const styles = StyleSheet.create({
     color: '#000',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 12
+    marginTop: 4,
+    marginRight: 4,
   },
   textInput: {
     height: 40,
-    width: "60%",
+    width: "40%",
     marginRight: 12,
     paddingLeft: 5,
     borderWidth: 1,
   },
   map: {
     width: '100%',
-    height: '85%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
