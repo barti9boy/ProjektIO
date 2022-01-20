@@ -53,7 +53,19 @@ export default function App() {
   const handleMapEvent = (event) => {
     setMapCenter(event.nativeEvent.data)
   }
+  const routeCalculate = () => {
+    let baseUrl = `https://api.tomtom.com/routing/1/calculateRoute/52.50931,13.42936:52.50274,13.43872/json?instructionsType=text&language=en-US&vehicleHeading=90&sectionType=traffic&report=effectiveSettings&routeType=eco&traffic=true&avoid=unpavedRoads&travelMode=car&vehicleMaxSpeed=120&vehicleCommercial=false&vehicleEngineType=combustion&key=${tomtomKey}`
 
+    axios
+      .get(baseUrl)
+      .then((response) => {
+        const geoJson = response.toGeoJson()
+            drawRoute(geoJson, map)
+        console.log(response.data);
+      });
+
+  }
+  routeCalculate()
   const handleSearchTextChange = changedSearchText => {
     if (!changedSearchText || changedSearchText.length < 5) 
       return;
