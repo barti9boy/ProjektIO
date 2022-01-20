@@ -122,6 +122,7 @@ export default function App() {
         originWhitelist={['*']}
         source={{ html: mapTemplate }}
       />
+      <Button title="Home" onPress={() => navigator.navigate("MainScreen")}></Button>
     </View>
   );
 }
