@@ -59,8 +59,6 @@ export default function App() {
     axios
       .get(baseUrl)
       .then((response) => {
-        const geoJson = response.toGeoJson()
-            drawRoute(geoJson, map)
         console.log(response.data);
       });
 
