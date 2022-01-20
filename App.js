@@ -122,6 +122,7 @@ const MyStack = () => {
           { loginState.userToken !== null ? (
             <Stack2.Navigator>
               <Stack2.Screen name="MainScreen" component={MainScreen} />
+              <Stack2.Screen name="TomTomMap" component={TomTomMap} />
             </Stack2.Navigator>
           )
           :
