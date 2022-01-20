@@ -8,7 +8,7 @@ import {
     TextInput,
     Platform,
     StyleSheet ,
-    StatusBar
+    StatusBar,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
@@ -16,10 +16,34 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {LinearGradient} from 'expo-linear-gradient';
 import { AuthContext } from "../context";
+//import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AsyncStorage } from 'react-native';
+
+
 
 const MainScreen = ({navigation}) => {
 
     const {signOut} = React.useContext(AuthContext);
+    //const userToken = AsyncStorage.getItem('userToken');
+    
+    const retrieveData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('userToken');
+          const value1 = await AsyncStorage.getItem('username');
+          const value2 = await AsyncStorage.getItem('password');
+          const value3 = await AsyncStorage.getItem('name');
+          const value4 = await AsyncStorage.getItem('surname');
+          const value5 = await AsyncStorage.getItem('isAvaileble');
+          const value6 = await AsyncStorage.getItem('isEmployer');
+
+          if (value !== null) {
+            // We have data!!
+            alert( 'Name: ' +  value3 + '\n' + 'Surname: ' + value4+ '\n' + 'Is Available: ' +  value5+ '\n' + 'Is Employer: ' + value6);
+          }
+        } catch (error) {
+          // Error retrieving data
+        }
+      };
 
     return (
         <View style={styles.container}>
@@ -34,14 +58,14 @@ const MainScreen = ({navigation}) => {
   
               <View style={styles.button}>
               <TouchableOpacity
-                      onPress={() => {loginHandle(data.username, data.password)}}
+                      onPress={() => {retrieveData()}}
                       style={[styles.signIn, {
                           borderColor: '#009387',
                           borderWidth: 1,
                           marginTop: 15
                       }]}
                   >
-                      <Text style={[styles.textSign, {
+                      <Text style={[styles.textSign, {             
                           color: '#009387'
                       }]}>Profile</Text>
                   </TouchableOpacity>
