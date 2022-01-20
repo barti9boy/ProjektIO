@@ -7,6 +7,8 @@ import StartScreen from './screens/StartScreen'
 import TomTomMap from './screens/Map'
 import SignUp from "./screens/SignUp";
 import MainScreen from './screens/MainScreen'
+import ProfileScreen from './screens/ProfileScreen'
+
 
 
 import { AuthContext } from './context';
@@ -61,20 +63,33 @@ const MyStack = () => {
 
   const authContext = React.useMemo(() => ({
     signIn: async(foundUser) => {
-      console.log("signing in")
-      console.log(userName)
-
       // setUserToken('fgkj');
       // setIsLoading(false);
       const userToken = String(foundUser[0].userToken);
-      const userName = foundUser[0].username;
+      const username = foundUser[0].username;
+      const password = foundUser[0].password;
+      const name = foundUser[0].name;
+      const surname = foundUser[0].surname;
+      const isAvaileble = foundUser[0].isAvaileble;
+      const isEmployer = foundUser[0].isEmployer;
+
+
+      console.log("signing in")
+      //console.log(userToken)
         try {
           await AsyncStorage.setItem('userToken', userToken);
+          await AsyncStorage.setItem('username', username);
+          await AsyncStorage.setItem('password', password);
+          await AsyncStorage.setItem('name', name);
+          await AsyncStorage.setItem('surname', surname);
+          await AsyncStorage.setItem('isAvaileble', isAvaileble);
+          await AsyncStorage.setItem('isEmployer', isEmployer);
+
         } catch(e) {
           console.log(e);
         }
       // console.log('user token: ', userToken);
-      dispatch({ type: 'LOGIN', id: userName, token: userToken });
+      dispatch({ type: 'LOGIN', id: username, token: userToken });
     },
     signOut: async() => {
       // setUserToken(null);
@@ -123,6 +138,7 @@ const MyStack = () => {
             <Stack2.Navigator>
               <Stack2.Screen name="MainScreen" component={MainScreen} />
               <Stack2.Screen name="TomTomMap" component={TomTomMap} />
+              <Stack2.Screen name="ProfileScreen" component={ProfileScreen} />
             </Stack2.Navigator>
           )
           :
