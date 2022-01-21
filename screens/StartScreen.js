@@ -64,7 +64,7 @@ const StartScreen = ({navigation}) => {
           return userName == item.username && password == item.password;
         })
         if(foundUser.length == 0){
-          Alert.alert('Invalid User' , 'Username or password is incorrect.', [{text: 'Ok'}]);
+          Alert.alert('Invalid User' , 'Username or password is incorrect.', [{text: 'OK'}]);
           return;
         }
         signIn(foundUser);
@@ -75,7 +75,7 @@ const StartScreen = ({navigation}) => {
       <View style={styles.container}>
           <StatusBar backgroundColor='#009387' barStyle="light-content"/>
         <View style={styles.header}>
-            <Text style={styles.text_header}>Welcome!</Text>
+            <Text style={styles.text_header}>HIT THE ROAD TRUCK</Text>
         </View>
         <Animatable.View 
             animation="fadeInUpBig"
@@ -146,26 +146,28 @@ const StartScreen = ({navigation}) => {
             <TouchableOpacity
                     onPress={() => {loginHandle(data.username, data.password)}}
                     style={[styles.signIn, {
-                        borderColor: '#009387',
-                        borderWidth: 1,
+                        borderColor: 'burlywood',
+                        borderWidth: 2,
+                        backgroundColor: 'cornsilk',
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#009387'
+                        color: 'burlywood'
                     }]}>Sign In</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SignUp')}
                     style={[styles.signIn, {
-                        borderColor: '#009387',
-                        borderWidth: 1,
+                        borderColor: 'burlywood',
+                        backgroundColor: 'cornsilk',
+                        borderWidth: 2,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#009387'
+                        color: 'burlywood'
                     }]}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
@@ -179,13 +181,13 @@ const StartScreen = ({navigation}) => {
   const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#009387'
+      backgroundColor: 'burlywood' //#009387
     },
     header: {
         flex: 1,
         justifyContent: 'flex-end',
-        paddingHorizontal: 20,
-        paddingBottom: 50
+        paddingHorizontal: 55,
+        paddingBottom: 60
     },
     footer: {
         flex: 3,
@@ -196,13 +198,17 @@ const StartScreen = ({navigation}) => {
         paddingVertical: 30
     },
     text_header: {
-        color: '#fff',
+        color: 'cornsilk',
+        textAlign: "center",
+        fontFamily: "Verdana-BoldItalic",
         fontWeight: 'bold',
-        fontSize: 30
+        fontSize: 30,
+        letterSpacing: 3
     },
     text_footer: {
         color: '#05375a',
-        fontSize: 18
+        fontSize: 17,
+        letterSpacing: 4
     },
     action: {
         flexDirection: 'row',
@@ -216,6 +222,7 @@ const StartScreen = ({navigation}) => {
         marginTop: Platform.OS === 'ios' ? 0 : -12,
         paddingLeft: 10,
         color: '#05375a',
+        letterSpacing: 2
     },
     button: {
         alignItems: 'center',
@@ -226,10 +233,15 @@ const StartScreen = ({navigation}) => {
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
+        borderRadius: 25
     },
     textSign: {
-        fontSize: 18,
-        fontWeight: 'bold'
+        fontSize: 16,
+        fontWeight: 'bold',
+        fontFamily: "Verdana",
+        letterSpacing: 5,
+        textTransform: "uppercase",
+        color: "burlywood"
+        
     }
   });
