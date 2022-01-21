@@ -64,7 +64,7 @@ const StartScreen = ({navigation}) => {
           return userName == item.username && password == item.password;
         })
         if(foundUser.length == 0){
-          Alert.alert('Invalid User' , 'Username or password is incorrect.', [{text: 'OK'}]);
+          Alert.alert('INVALID USER' , 'Username or password is incorrect.', [{text: 'OK'}]);
           return;
         }
         signIn(foundUser);

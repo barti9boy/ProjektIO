@@ -75,7 +75,7 @@ const SignUp = ({navigation}) => {
         <View style={styles.container}>
             <StatusBar backgroundColor='#009387' barStyle="light-content"/>
           <View style={styles.header}>
-              <Text style={styles.text_header}>Welcome!</Text>
+              <Text style={styles.text_header}>HIT THE ROAD TRUCK</Text>
           </View>
           <Animatable.View 
               animation="fadeInUpBig"
@@ -181,24 +181,30 @@ const SignUp = ({navigation}) => {
   
               <View style={styles.button}>
                   <LinearGradient
-                      colors={['#08d4c4', '#01ab9d']}
-                      style={styles.signIn}
+                      colors={['burlywood']}
+                      //style={styles.signIn}
+                      style={[styles.signIn, {
+                        borderColor: 'burlywood',
+                        borderWidth: 2,
+                        marginTop: 15
+                    }]}
                   >
                       <Text style={[styles.textSign, {
-                          color:'#fff'
+                          color:'cornsilk'
                       }]}>Sign Up</Text>
                   </LinearGradient>
   
                   <TouchableOpacity
                       onPress={() => navigation.navigate('StartScreen')}
                       style={[styles.signIn, {
-                          borderColor: '#009387',
-                          borderWidth: 1,
-                          marginTop: 15
+                        borderColor: 'burlywood',
+                        borderWidth: 2,
+                        backgroundColor: 'cornsilk',
+                        marginTop: 15
                       }]}
                   >
                       <Text style={[styles.textSign, {
-                          color: '#009387'
+                          color: 'burlywood'
                       }]}>Sign In</Text>
                   </TouchableOpacity>
               </View>
@@ -212,13 +218,13 @@ export default SignUp;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#009387'
+      backgroundColor: 'burlywood'
     },
     header: {
         flex: 1,
         justifyContent: 'flex-end',
-        paddingHorizontal: 20,
-        paddingBottom: 50
+        paddingHorizontal: 55,
+        paddingBottom: 60
     },
     footer: {
         flex: 3,
@@ -229,13 +235,17 @@ const styles = StyleSheet.create({
         paddingVertical: 30
     },
     text_header: {
-        color: '#fff',
+        color: 'cornsilk',
+        textAlign: "center",
+        fontFamily: "Verdana-BoldItalic",
         fontWeight: 'bold',
-        fontSize: 30
+        fontSize: 30,
+        letterSpacing: 3
     },
     text_footer: {
         color: '#05375a',
-        fontSize: 18
+        fontSize: 17,
+        letterSpacing: 4
     },
     action: {
         flexDirection: 'row',
@@ -259,10 +269,14 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
+        borderRadius: 25
     },
     textSign: {
-        fontSize: 18,
-        fontWeight: 'bold'
+        fontSize: 16,
+        fontWeight: 'bold',
+        fontFamily: "Verdana",
+        letterSpacing: 5,
+        textTransform: "uppercase",
+        color: "burlywood"
     }
   });

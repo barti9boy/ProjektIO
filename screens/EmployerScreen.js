@@ -38,7 +38,7 @@ const EmployerScreen = ({navigation}) => {
 
           if (value !== null) {
             // We have data!!
-            alert( 'Name: ' +  value3 + '\n' + 'Surname: ' + value4+ '\n' + 'Is Available: ' +  value5+ '\n' + 'Is Employer: ' + value6);
+            alert( 'N A M E:                           ' +  value3 + '\n' + 'S U R N A M E:        ' + value4+ '\n' + 'I S  A V A I L A B L E:    ' +  value5+ '\n' + 'I S  E M P L O Y E R:      ' + value6);
           }
         } catch (error) {
           // Error retrieving data
@@ -49,7 +49,7 @@ const EmployerScreen = ({navigation}) => {
         <View style={styles.container}>
             <StatusBar backgroundColor='#009387' barStyle="light-content"/>
           <View style={styles.header}>
-              <Text style={styles.text_header}>Welcome!</Text>
+              <Text style={styles.text_header}>HIT THE ROAD TRUCK</Text>
           </View>
           <Animatable.View 
               animation="fadeInUpBig"
@@ -60,52 +60,56 @@ const EmployerScreen = ({navigation}) => {
               <TouchableOpacity
                       onPress={() => {retrieveData()}}
                       style={[styles.signIn, {
-                          borderColor: '#009387',
-                          borderWidth: 1,
-                          marginTop: 15
+                        borderColor: 'burlywood',
+                        borderWidth: 2,
+                        backgroundColor: 'cornsilk',
+                        marginTop: 15
                       }]}
                   >
                       <Text style={[styles.textSign, {             
-                          color: '#009387'
+                          color: 'burlywood'
                       }]}>Profile</Text>
                   </TouchableOpacity>
   
                   <TouchableOpacity
                       onPress={() => alert('Task added')}
                       style={[styles.signIn, {
-                          borderColor: '#009387',
-                          borderWidth: 1,
-                          marginTop: 15
+                        borderColor: 'burlywood',
+                        borderWidth: 2,
+                        backgroundColor: 'cornsilk',
+                        marginTop: 15
                       }]}
                   >
                       <Text style={[styles.textSign, {
-                          color: '#009387'
+                          color: 'burlywood'
                       }]}>Add Task</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
                       onPress={() => alert('Select Employee')}
                       style={[styles.signIn, {
-                          borderColor: '#009387',
-                          borderWidth: 1,
-                          marginTop: 15
+                        borderColor: 'burlywood',
+                        borderWidth: 2,
+                        backgroundColor: 'cornsilk',
+                        marginTop: 15
                       }]}
                   >
                       <Text style={[styles.textSign, {
-                          color: '#009387'
+                          color: 'burlywood'
                       }]}>Check Task</Text>
                   </TouchableOpacity>
   
                   <TouchableOpacity
                       onPress={() => signOut()}
                       style={[styles.signIn, {
-                          borderColor: '#009387',
-                          borderWidth: 1,
-                          marginTop: 15
+                        borderColor: 'burlywood',
+                        borderWidth: 2,
+                        backgroundColor: 'cornsilk',
+                        marginTop: 15
                       }]}
                   >
                       <Text style={[styles.textSign, {
-                          color: '#009387'
+                          color: 'burlywood'
                       }]}>SignOut</Text>
                   </TouchableOpacity>
               </View>
@@ -119,13 +123,13 @@ const EmployerScreen = ({navigation}) => {
     const styles = StyleSheet.create({
       container: {
         flex: 1, 
-        backgroundColor: '#009387'
+        backgroundColor: 'burlywood'
       },
       header: {
-          flex: 1,
-          justifyContent: 'flex-end',
-          paddingHorizontal: 20,
-          paddingBottom: 50
+        flex: 1,
+        justifyContent: 'flex-end',
+        paddingHorizontal: 55,
+        paddingBottom: 60
       },
       footer: {
           flex: 3,
@@ -136,13 +140,17 @@ const EmployerScreen = ({navigation}) => {
           paddingVertical: 30
       },
       text_header: {
-          color: '#fff',
-          fontWeight: 'bold',
-          fontSize: 30
+        color: 'cornsilk',
+        textAlign: "center",
+        fontFamily: "Verdana-BoldItalic",
+        fontWeight: 'bold',
+        fontSize: 30,
+        letterSpacing: 3
       },
       text_footer: {
-          color: '#05375a',
-          fontSize: 18
+        color: '#05375a',
+        fontSize: 17,
+        letterSpacing: 4
       },
       action: {
           flexDirection: 'row',
@@ -162,14 +170,18 @@ const EmployerScreen = ({navigation}) => {
           marginTop: 50
       },
       signIn: {
-          width: '100%',
-          height: 50,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 10
+        width: '100%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 25
       },
       textSign: {
-          fontSize: 18,
-          fontWeight: 'bold'
+        fontSize: 16,
+        fontWeight: 'bold',
+        fontFamily: "Verdana",
+        letterSpacing: 5,
+        textTransform: "uppercase",
+        color: "burlywood"
       }
     });
